@@ -8,5 +8,6 @@ spring:
           default-label: zipkin-sleuth
           uri: https://github.com/Enrique-MCPP/keycloak.git
           search-paths: config-data
+          clone-on-start: true
   application:
     name: config-service
