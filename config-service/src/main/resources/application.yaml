@@ -11,5 +11,4 @@ spring:
           clone-on-start: true
   application:
     name: config-service
-test:
-  name: test
+
