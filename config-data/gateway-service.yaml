@@ -15,6 +15,7 @@ spring:
     gateway:
       discovery:
         locator:
+          lower-case-service-id: true
           enabled: true
       routes:
         - id: user-service
@@ -38,3 +39,11 @@ spring:
       port: 15672
       username: guest
       password: guest
+    loadbalancer: 
+      ribbon:   
+        enabled: false
+  security: 
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri : http://localhost:8180/realms/microservices-realm
