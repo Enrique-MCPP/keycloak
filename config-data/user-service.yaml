@@ -42,5 +42,5 @@ spring:
   application:
     zipkin: http://localhost:9411
 test:
-  name: test
+  name: testA
             
