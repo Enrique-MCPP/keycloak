@@ -12,11 +12,6 @@ eureka:
 
 spring:
   cloud:
-  rabbitmq:
-  host: localhost
-  port: 5672
-  username: guest
-  password: guest
     gateway:
       discovery:
         locator:
@@ -30,10 +25,6 @@ spring:
           uri: lb://user-service
           predicates:
             - Path=/api/test
-        - id: user-service
-          uri: lb://user-service
-          predicates:
-            - Path=/actuator/refresh
         - id: car-service
           uri: lb://car-service
           predicates:
@@ -42,3 +33,8 @@ spring:
           uri: lb://bike-service
           predicates:
             - Path=/bike/**
+    rabbitmq:
+      host: localhost
+      port: 5672
+      username: guest
+      password: guest
