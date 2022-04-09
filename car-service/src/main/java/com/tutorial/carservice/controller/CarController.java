@@ -5,6 +5,7 @@ import java.util.List;
 import org.keycloak.OAuth2Constants;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;
+import org.keycloak.admin.client.token.TokenManager;
 import org.keycloak.representations.AccessTokenResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,13 +28,17 @@ public class CarController {
 
 	@GetMapping
 	public ResponseEntity<List<Car>> getAll() {
+//		Keycloak instance = Keycloak.getInstance("http://keycloak:8080/auth", "microservices-realm", "admin", "admin",
+//				"spring-cloud-gateway-client", "Ddq8OznjE8RsyR5x3IhcSJU8AGEwvsDm");
+//		TokenManager tokenmanager = instance.tokenManager();
+//		String accessToken = tokenmanager.getAccessTokenString();
 		Keycloak keycloak = KeycloakBuilder.builder() //
-				.serverUrl("http://localhost:8180/realms/microservices-realm/protocol/openid-connect/token") //
-				.grantType(OAuth2Constants.CLIENT_CREDENTIALS) //
+				.serverUrl("http://keycloak:8180/auth") //
+				.realm("microservices-realm").grantType(OAuth2Constants.CLIENT_CREDENTIALS) //
 				.clientId("spring-cloud-gateway-client") //
 				.clientSecret("Ddq8OznjE8RsyR5x3IhcSJU8AGEwvsDm") //
 				.build();
-		AccessTokenResponse tok = keycloak.tokenManager().getAccessToken();
+//		AccessTokenResponse tok = keycloak.tokenManager().getAccessToken();
 		List<Car> cars = carService.getAll();
 		if (cars.isEmpty())
 			return ResponseEntity.noContent().build();
