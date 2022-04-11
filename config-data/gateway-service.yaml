@@ -26,8 +26,11 @@ spring:
           uri: lb://user-service
           predicates:
             - Path=/api/test
-
-
+        - id: car-service
+          uri: lb://car-service
+          predicates:
+            - Path=/car/**
+        
     loadbalancer: 
       ribbon:   
         enabled: false
