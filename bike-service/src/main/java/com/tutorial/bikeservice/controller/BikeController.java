@@ -30,9 +30,7 @@ public class BikeController {
 	public ResponseEntity<List<Bike>> getAll() {
 		Jwt jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-		String response = webClient.get().uri("http://localhost:8080/user")
-				.headers(header -> header.setBearerAuth(jwt.getTokenValue())).retrieve().bodyToMono(String.class)
-				.block();
+		String response = webClient.get().uri("http://localhost:8080/user").retrieve().bodyToMono(String.class).block();
 		List<Bike> bikes = bikeService.getAll();
 		if (bikes.isEmpty())
 			return ResponseEntity.noContent().build();
