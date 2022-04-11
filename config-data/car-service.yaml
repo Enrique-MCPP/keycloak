@@ -11,4 +11,8 @@ eureka:
 spring:
   application:
     zipkin: http://localhost:9411
-
+  security: 
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri : http://localhost:8180/realms/microservices-realm
