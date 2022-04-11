@@ -3,6 +3,7 @@ package com.tutorial.bikeservice.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -28,13 +30,20 @@ public class BikeController {
 
 	@GetMapping
 	public ResponseEntity<List<Bike>> getAll() {
-		Jwt jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-		String response = webClient.get().uri("http://localhost:8080/user").retrieve().bodyToMono(String.class).block();
 		List<Bike> bikes = bikeService.getAll();
 		if (bikes.isEmpty())
 			return ResponseEntity.noContent().build();
 		return ResponseEntity.ok(bikes);
+	}
+
+	@GetMapping("/calluser")
+	@ResponseStatus(HttpStatus.OK)
+	public String helloWebClient() {
+		Jwt jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		String response = webClient.get().uri("http://localhost:8080/user").retrieve().bodyToMono(String.class).block();
+
+		return "hello - message from microservice 2 -  " + response;
 	}
 
 	@GetMapping("/{id}")
