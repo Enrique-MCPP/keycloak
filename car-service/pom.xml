@@ -74,6 +74,10 @@
 			<artifactId>spring-security-oauth2-resource-server</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-client</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-oauth2-jose</artifactId>
 		</dependency>
@@ -86,6 +90,11 @@
 			<artifactId>keycloak-admin-client</artifactId>
 			<version>17.0.1</version>
 		</dependency>
+		 <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webflux</artifactId>
+        </dependency>
+      
 	</dependencies>
 
 	<dependencyManagement>

@@ -2,19 +2,17 @@ package com.tutorial.carservice.controller;
 
 import java.util.List;
 
-import org.keycloak.OAuth2Constants;
-import org.keycloak.admin.client.Keycloak;
-import org.keycloak.admin.client.KeycloakBuilder;
-import org.keycloak.admin.client.token.TokenManager;
-import org.keycloak.representations.AccessTokenResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import com.tutorial.carservice.entity.Car;
 import com.tutorial.carservice.service.CarService;
@@ -25,6 +23,7 @@ public class CarController {
 
 	@Autowired
 	CarService carService;
+	private final WebClient webClient = WebClient.builder().build();
 
 	@GetMapping
 	public ResponseEntity<List<Car>> getAll() {
@@ -39,6 +38,11 @@ public class CarController {
 //				.clientSecret("Ddq8OznjE8RsyR5x3IhcSJU8AGEwvsDm") //
 //				.build();
 //		AccessTokenResponse tok = keycloak.tokenManager().getAccessToken();
+		Jwt jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		String response = webClient.get().uri("http://user-service/user")
+				.headers(header -> header.setBearerAuth(jwt.getTokenValue())).retrieve().bodyToMono(String.class)
+				.block();
 		List<Car> cars = carService.getAll();
 		if (cars.isEmpty())
 			return ResponseEntity.noContent().build();
