@@ -40,7 +40,7 @@ public class CarController {
 //		AccessTokenResponse tok = keycloak.tokenManager().getAccessToken();
 		Jwt jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-		String response = webClient.get().uri("http://user-service/user")
+		String response = webClient.get().uri("http://localhost:8080/user")
 				.headers(header -> header.setBearerAuth(jwt.getTokenValue())).retrieve().bodyToMono(String.class)
 				.block();
 		List<Car> cars = carService.getAll();
