@@ -11,4 +11,22 @@ eureka:
 spring:
   application:
     zipkin: http://localhost:9411
+security:
+  oauth2:
+    client:
+      registration:
+      spring-cloud-gateway-client :
+        client-id: spring-cloud-gateway-client 
+        client-secret: Ddq8OznjE8RsyR5x3IhcSJU8AGEwvsDm
+        scope: openid, profile, roles
+        authorization-grant-type: client_credentials
+        redirect-uri: http://localhost:8080/login/oauth2/code/spring-cloud-gateway-client 
+        provider: keycloak
+
+      provider:
+        keycloak:
+          issuer-uri: http://localhost:8180/realms/microservices-realm
+
+    resourceserver:
+      jwt.issuer-uri: http://localhost:8180/realms/microservices-realm
 
