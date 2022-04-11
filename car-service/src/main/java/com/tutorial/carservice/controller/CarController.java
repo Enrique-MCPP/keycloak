@@ -32,12 +32,12 @@ public class CarController {
 //				"spring-cloud-gateway-client", "Ddq8OznjE8RsyR5x3IhcSJU8AGEwvsDm");
 //		TokenManager tokenmanager = instance.tokenManager();
 //		String accessToken = tokenmanager.getAccessTokenString();
-		Keycloak keycloak = KeycloakBuilder.builder() //
-				.serverUrl("http://keycloak:8180/auth") //
-				.realm("microservices-realm").grantType(OAuth2Constants.CLIENT_CREDENTIALS) //
-				.clientId("spring-cloud-gateway-client") //
-				.clientSecret("Ddq8OznjE8RsyR5x3IhcSJU8AGEwvsDm") //
-				.build();
+//		Keycloak keycloak = KeycloakBuilder.builder() //
+//				.serverUrl("http://localhost:8180/realms/microservices-realm/protocol/openid-connect/token") //
+//				.realm("microservices-realm").grantType(OAuth2Constants.CLIENT_CREDENTIALS) //
+//				.clientId("spring-cloud-gateway-client") //
+//				.clientSecret("Ddq8OznjE8RsyR5x3IhcSJU8AGEwvsDm") //
+//				.build();
 //		AccessTokenResponse tok = keycloak.tokenManager().getAccessToken();
 		List<Car> cars = carService.getAll();
 		if (cars.isEmpty())
