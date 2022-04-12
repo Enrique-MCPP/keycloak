@@ -41,7 +41,9 @@ public class BikeController {
 	public String helloWebClient() {
 		Jwt jwt = (Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-		String response = webClient.get().uri("http://localhost:8080/user").retrieve().bodyToMono(String.class).block();
+		String response = webClient.get().uri("http://localhost:8080/user")
+				.headers(header -> header.setBearerAuth(jwt.getTokenValue())).retrieve().bodyToMono(String.class)
+				.block();
 
 		return "hello - message from microservice 2 -  " + response;
 	}
