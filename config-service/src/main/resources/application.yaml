@@ -5,7 +5,7 @@ spring:
     config:
       server:
         git:
-          default-label: keycloak-credentials
+          default-label: circuit-breaker
           uri: https://github.com/Enrique-MCPP/keycloak.git
           search-paths: config-data
           clone-on-start: true
