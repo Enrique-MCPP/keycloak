@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: bike-service
+server:
+  port: ${PORT:${SERVER_PORT:0}}
+
+      

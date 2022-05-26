@@ -1,12 +1,45 @@
 spring:
   application:
     name: user-service
-  cloud:
-    config:
-      enabled: true
-      uri: http://localhost:8081
+server:
+  port: ${PORT:${SERVER_PORT:0}}
+resilience4j.circuitbreaker:
+    instances:
+        carsCB:
+            registerHealthIndicator: true
+            slidingWindowSize: 10
+            permittedNumberOfCallsInHalfOpenState: 3
+            slidingWindowType: TIME_BASED
+            minimumNumberOfCalls: 4
+            waitDurationInOpenState: 5s
+            failureRateThreshold: 50
+            eventConsumerBufferSize: 10
+        bikesCB:
+            registerHealthIndicator: true
+            slidingWindowSize: 10
+            permittedNumberOfCallsInHalfOpenState: 3
+            slidingWindowType: TIME_BASED
+            minimumNumberOfCalls: 4
+            waitDurationInOpenState: 5s
+            failureRateThreshold: 50
+            eventConsumerBufferSize: 10
+        allCB:
+            registerHealthIndicator: true
+            slidingWindowSize: 10
+            permittedNumberOfCallsInHalfOpenState: 3
+            slidingWindowType: TIME_BASED
+            minimumNumberOfCalls: 4
+            waitDurationInOpenState: 5s
+            failureRateThreshold: 50
+            eventConsumerBufferSize: 10
+
+  
+test:
+  name: test clave modificada  
+  
 management:
   endpoints:
     web:
       exposure:
-        include: "*"    
+        include: "*" 
+   

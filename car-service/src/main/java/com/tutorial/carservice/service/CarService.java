@@ -11,7 +11,7 @@ import java.util.List;
 public class CarService {
 
     @Autowired
-    CarRepository carRepository;
+    private CarRepository carRepository;
 
     public List<Car> getAll() {
         return carRepository.findAll();
