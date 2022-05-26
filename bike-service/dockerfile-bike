@@ -1,0 +1,8 @@
+FROM openjdk:17-jdk-alpine
+ARG JAR_FILE=target/*.jar
+RUN mkdir /opt/bike-service
+COPY ${JAR_FILE} /opt/bike-service/bikeservice.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","/opt/bike-service/bikeservice.jar"]
+
+

@@ -1,0 +1,8 @@
+FROM openjdk:17-jdk-alpine
+ARG JAR_FILE=target/*.jar
+RUN mkdir /opt/gateway-service
+COPY ${JAR_FILE} /opt/gateway-service/gatewayservice.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","/opt/gateway-service/gatewayservice.jar"]
+
+
